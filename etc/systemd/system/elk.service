@@ -1,0 +1,12 @@
+[Unit]
+Description= Elk stack service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=10
+ExecStart=/usr/local/bin/docker-compose -p elk -f /etc/container/elk/docker-compose.yml up
+ExecStop=/usr/local/bin/docker-compose  -p elk -f /etc/container/elk/docker-compose.yml down
+
+[Install]
+WantedBy=default.target

@@ -16,3 +16,31 @@
 
     sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
+
+
+# Create config directory
+
+    mkdir -p /etc/container/elk
+
+
+    # Copy configuration files from local repository
+
+        export ELK_HOST=myserver.example.com  # Change here #
+        scp -a etc/container/elk root@$ELK_HOST:/etc/container/
+        scp etc/systemd/system/elk.service root@$ELK_HOST:/etc/systemd/system/elk.service
+
+
+# Configure service
+
+    systemctl daemon-reload
+    systemctl enable elk
+
+
+# Restart service
+
+    systemctl restart elk
+
+
+# Run manually
+
+    docker-compose -f /etc/container/elk/docker-compose.yml up
