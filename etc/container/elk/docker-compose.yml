@@ -8,6 +8,8 @@ services:
       - /etc/container/elk/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     ports:
       - "6500:6500/udp"
+      - "514:5514/tcp"
+      - "514:5514/udp"
     environment:
       http.host: "0.0.0.0"
       ES_JAVA_OPTS: '-Xms2048m -Xmx2048m'
