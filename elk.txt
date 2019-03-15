@@ -20,13 +20,13 @@
 
 # Create config directory
 
-    mkdir -p /etc/container/elk
+    mkdir -p /etc/container
 
 
     # Copy configuration files from local repository
 
         export ELK_HOST=myserver.example.com  # Change here #
-        scp -a etc/container/elk root@$ELK_HOST:/etc/container/
+        scp -r etc/container/elk root@$ELK_HOST:/etc/container/
         scp etc/systemd/system/elk.service root@$ELK_HOST:/etc/systemd/system/elk.service
 
 
