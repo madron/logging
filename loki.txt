@@ -25,8 +25,8 @@
 
     # Copy configuration files from local repository
 
-        export ELK_HOST=myserver.example.com  # Change here #
-        scp -r etc/container/loki root@$ELK_HOST:/etc/container/
+        export LOKI_HOST=myserver.example.com  # Change here #
+        scp -r etc/container/loki root@$LOKI_HOST:/etc/container/
         scp etc/systemd/system/loki.service root@$ELK_HOST:/etc/systemd/system/loki.service
 
 
@@ -44,3 +44,8 @@
 # Run manually
 
     docker-compose -f /etc/container/loki/docker-compose.yml up
+
+
+# Send test data
+
+    echo -n "test message" | nc -4u -w1 $LOKI_HOST 514

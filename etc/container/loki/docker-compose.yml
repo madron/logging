@@ -23,6 +23,20 @@ services:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
 
+  logstash:
+    image: logstash:6.6.2
+    container_name: loki-logstash
+    volumes:
+      - /etc/container/loki/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+    networks:
+      - loki
+    ports:
+      - "514:5514/tcp"
+      - "514:5514/udp"
+    environment:
+      http.host: "0.0.0.0"
+      ES_JAVA_OPTS: '-Xms2048m -Xmx2048m'
+
   promtail:
     image: grafana/promtail:master
     container_name: loki-promtail
